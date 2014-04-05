@@ -15,7 +15,7 @@ public class Server {
 		try {
 			@SuppressWarnings("resource")
 			ServerSocket seSocket = new ServerSocket(port, backlog);
-			System.out.println(Dater.dateString() + "Server up and running...");
+			System.out.println("Server up and running...");
 			for (;;) {
 				Socket clSocket = seSocket.accept();
 

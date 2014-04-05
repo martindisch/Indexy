@@ -29,9 +29,9 @@ public class ClientManager implements Runnable {
 					new InputStreamReader(clSocket.getInputStream(), "UTF-8")));
 			indexManager = new IndexManager(io);
 		} catch (UnsupportedEncodingException e) {
-			System.out.println(Dater.dateString() + e.getMessage());
+			System.out.println(e.getMessage());
 		} catch (IOException e) {
-			System.out.println(Dater.dateString() + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -65,7 +65,7 @@ public class ClientManager implements Runnable {
 			try {
 				clSocket.close();
 			} catch (IOException e) {
-				System.out.println(Dater.dateString() + e.getMessage());
+				System.out.println(e.getMessage());
 			}
 		}
 	}

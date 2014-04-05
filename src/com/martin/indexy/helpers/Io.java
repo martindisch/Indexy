@@ -20,9 +20,9 @@ public class Io {
 			WrOut.write(out);
 			WrOut.newLine();
 			WrOut.flush();
-			System.out.println(Dater.dateString() + out);
+			System.out.println(out);
 		} catch (IOException e) {
-			System.out.println(Dater.dateString() + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -30,9 +30,9 @@ public class Io {
 		try {
 			WrOut.write(out);
 			WrOut.flush();
-			System.out.print(Dater.dateString() + out);
+			System.out.print(out);
 		} catch (IOException e) {
-			System.out.println(Dater.dateString() + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -41,8 +41,9 @@ public class Io {
 		try {
 			rep = ReIn.readLine();
 		} catch (IOException e) {
-			System.out.println(Dater.dateString() + e.getMessage());
+			System.out.println(e.getMessage());
 		}
+		System.out.println(rep);
 		return rep;
 	}
 
@@ -51,7 +52,7 @@ public class Io {
 			ReIn.close();
 			WrOut.close();
 		} catch (IOException e) {
-			System.out.println(Dater.dateString() + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
