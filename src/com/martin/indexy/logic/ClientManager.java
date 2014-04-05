@@ -40,18 +40,22 @@ public class ClientManager implements Runnable {
 
 		String input;
 		displayCommands();
-		io.out("\n");
+		io.outSingle("\n");
 
-		while (!(input = io.in()).toLowerCase().contentEquals("end")) {
-			try {
-				Action action = Parser.getAction(input);
-				doAction(action);
-				io.out("\n");
-			} catch (Exception e) {
-				io.out("A strange exception has just occurred: "
-						+ e.getMessage()
-						+ "\nBut don't worry, business as usual\n");
+		try {
+			while (!(input = io.in()).toLowerCase().contentEquals("end")) {
+				try {
+					Action action = Parser.getAction(input);
+					doAction(action);
+					io.outSingle("\n");
+				} catch (Exception e) {
+					io.out("A strange exception has just occurred: "
+							+ e.getMessage()
+							+ "\nBut don't worry, business as usual\n");
+				}
 			}
+		} catch (NullPointerException e) {
+			System.out.println("User has probably quit");
 		}
 		io.close();
 		try {

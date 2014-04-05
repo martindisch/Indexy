@@ -212,11 +212,11 @@ public class IndexManager {
 
 		io.out("\nTitle:  " + result.getTitle());
 		if (result.getTags().getList().size() > 0) {
-			io.out("Tags:   ");
+			io.outSingle("Tags:   ");
 			for (String tag : result.getTags().getList()) {
 				if (!tag.equals(result.getTags().getList()
 						.get(result.getTags().getList().size() - 1))) {
-					io.out(tag + ", ");
+					io.outSingle(tag + ", ");
 				} else {
 					io.out(tag);
 				}

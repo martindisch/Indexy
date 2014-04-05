@@ -18,7 +18,19 @@ public class Io {
 	public void out(String out) {
 		try {
 			WrOut.write(out);
+			WrOut.newLine();
+			WrOut.flush();
 		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void outSingle(String out) {
+		try {
+			WrOut.write(out);
+			WrOut.flush();
+		}
+		catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 	}
