@@ -54,15 +54,19 @@ public class ClientManager implements Runnable {
 							+ "\nBut don't worry, business as usual\n");
 				}
 			}
-		} catch (NullPointerException e) {
+		}
+		catch (Exception e) {
+			// Yeah, crap... Let's hope it was really a quit
+		}
+		finally {
 			System.out.println(Dater.dateString() + "User has quit");
 			indexManager.write("db");
-		}
-		io.close();
-		try {
-			clSocket.close();
-		} catch (IOException e) {
-			System.out.println(Dater.dateString() + e.getMessage());
+			io.close();
+			try {
+				clSocket.close();
+			} catch (IOException e) {
+				System.out.println(Dater.dateString() + e.getMessage());
+			}
 		}
 	}
 
