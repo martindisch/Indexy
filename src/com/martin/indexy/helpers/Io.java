@@ -1,25 +1,45 @@
 package com.martin.indexy.helpers;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class Io {
 	
-	private static Scanner sc = new Scanner(System.in);
+	private BufferedWriter WrOut;
+	private BufferedReader ReIn;
 	
-	public static void out(String out) {
-		System.out.println(out);
+	public Io(BufferedWriter out, BufferedReader in) {
+		super();
+		this.WrOut = out;
+		this.ReIn = in;
+	}
+
+	public void out(String out) {
+		try {
+			WrOut.write(out);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
-	static void outSingle(String out) {
-		System.out.print(out);
+	public String in() {
+		String rep = null;
+		try {
+			rep = ReIn.readLine();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return rep;
 	}
 	
-	public static String in() {
-		return sc.nextLine();
-	}
-	
-	public static void closeSc() {
-		sc.close();
+	public void close() {
+		try {
+			ReIn.close();
+			WrOut.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
