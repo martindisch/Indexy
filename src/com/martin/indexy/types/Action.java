@@ -1,10 +1,10 @@
 package com.martin.indexy.types;
 
 public class Action {
-	
+
 	private Commands command;
 	private String data;
-	
+
 	public Action(Commands command, String data) {
 		super();
 		this.command = command;
@@ -18,5 +18,5 @@ public class Action {
 	public String getData() {
 		return data;
 	}
-	
+
 }

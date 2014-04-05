@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 
+import com.martin.indexy.helpers.Dater;
 import com.martin.indexy.helpers.IndexManager;
 import com.martin.indexy.helpers.Io;
 import com.martin.indexy.helpers.Parser;
@@ -24,14 +25,13 @@ public class ClientManager implements Runnable {
 		this.clSocket = clSocket;
 		try {
 			io = new Io(new BufferedWriter(new OutputStreamWriter(
-					clSocket.getOutputStream(), "ISO-8859-1")),
-					new BufferedReader(new InputStreamReader(clSocket
-							.getInputStream(), "ISO-8859-1")));
+					clSocket.getOutputStream(), "UTF-8")), new BufferedReader(
+					new InputStreamReader(clSocket.getInputStream(), "UTF-8")));
 			indexManager = new IndexManager(io);
 		} catch (UnsupportedEncodingException e) {
-			System.out.println(e.getMessage());
+			System.out.println(Dater.dateString() + e.getMessage());
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.out.println(Dater.dateString() + e.getMessage());
 		}
 	}
 
@@ -55,13 +55,14 @@ public class ClientManager implements Runnable {
 				}
 			}
 		} catch (NullPointerException e) {
-			System.out.println("User has quit");
+			System.out.println(Dater.dateString() + "User has quit");
+			indexManager.write("db");
 		}
 		io.close();
 		try {
 			clSocket.close();
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.out.println(Dater.dateString() + e.getMessage());
 		}
 	}
 

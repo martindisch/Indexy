@@ -13,7 +13,7 @@ import com.martin.indexy.types.Entry;
 import com.martin.indexy.types.Tags;
 
 public class IndexManager {
-	
+
 	private Io io;
 
 	public IndexManager(Io io) {
@@ -45,8 +45,7 @@ public class IndexManager {
 			newOne = new Entry(title, folder, index, page, tags);
 			IndexHolder.entries.add(newOne);
 		}
-		io.out("List filled in "
-				+ (System.currentTimeMillis() - millis) + "ms");
+		io.out("List filled in " + (System.currentTimeMillis() - millis) + "ms");
 
 		showMem();
 	}
@@ -135,13 +134,13 @@ public class IndexManager {
 				if (!results.get(i).getTitle().toLowerCase()
 						.contains(term.toLowerCase())) {
 					io.out("["
-							+ (IndexHolder.entries.indexOf(results.get(i)) + 1) + "]   "
-							+ results.get(i).getTitle()
+							+ (IndexHolder.entries.indexOf(results.get(i)) + 1)
+							+ "]   " + results.get(i).getTitle()
 							+ " (occurrence in tags)");
 				} else {
 					io.out("["
-							+ (IndexHolder.entries.indexOf(results.get(i)) + 1) + "]   "
-							+ results.get(i).getTitle());
+							+ (IndexHolder.entries.indexOf(results.get(i)) + 1)
+							+ "]   " + results.get(i).getTitle());
 				}
 			}
 		} else {
@@ -189,7 +188,7 @@ public class IndexManager {
 			io.out("Input is out of bounds");
 		}
 	}
-	
+
 	public void display(String data) {
 		try {
 			int index = Integer.parseInt(data.split(" ")[0]) - 1;
@@ -206,7 +205,7 @@ public class IndexManager {
 		long memory = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024);
 		io.out("Using " + memory + "MB of memory");
 	}
-	
+
 	private void showEntry(int index) {
 		Entry result = IndexHolder.entries.get(index);
 

@@ -4,27 +4,36 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.martin.indexy.helpers.Dater;
+
 public class Server {
 
 	public static void main(String[] args) {
 		final int backlog = 10;
 		final int port = 1234;
-		
+
 		try {
 			@SuppressWarnings("resource")
 			ServerSocket seSocket = new ServerSocket(port, backlog);
-			System.out.println("Server up and running...");
+			System.out.println(Dater.dateString() + "Server up and running...");
 			for (;;) {
 				Socket clSocket = seSocket.accept();
-				
+
+				System.out.println(Dater.dateString() + "User connected");
+
 				ClientManager clM = new ClientManager(clSocket);
 
 				new Thread(clM).start();
 			}
-		}
-		catch (IOException e) {
-			System.err.println(e);
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out
+					.println("This horrible exception has happended and made the server inoperational:\n"
+							+ e.getMessage() + "Press any key to exit");
+			try {
+				System.in.read();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
