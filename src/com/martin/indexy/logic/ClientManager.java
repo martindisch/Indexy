@@ -55,7 +55,7 @@ public class ClientManager implements Runnable {
 				}
 			}
 		} catch (NullPointerException e) {
-			System.out.println("User has probably quit");
+			System.out.println("User has quit");
 		}
 		io.close();
 		try {
