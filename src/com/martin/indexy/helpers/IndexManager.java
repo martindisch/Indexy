@@ -14,16 +14,14 @@ import com.martin.indexy.types.Entry;
 import com.martin.indexy.types.Tags;
 
 public class IndexManager {
-	private ArrayList<Entry> entries;
-	Scanner sc;
+	private static ArrayList<Entry> entries;
 
 	public IndexManager(Scanner sc) {
 		super();
 		entries = new ArrayList<Entry>();
-		this.sc = sc;
 	}
 
-	public void generate(int size) {
+	public static void generate(int size) {
 		Io.out("Filling list of size " + size);
 		long millis = System.currentTimeMillis();
 		Random r = new Random();
@@ -53,7 +51,7 @@ public class IndexManager {
 		showMem();
 	}
 
-	public void write(String filename) {
+	public static void write(String filename) {
 		try {
 			FileOutputStream fos = new FileOutputStream(filename);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -72,7 +70,7 @@ public class IndexManager {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void read(String filename) {
+	public static void read(String filename) {
 		try {
 			FileInputStream fis = new FileInputStream(filename);
 			ObjectInputStream ois = new ObjectInputStream(fis);
@@ -92,7 +90,7 @@ public class IndexManager {
 		}
 	}
 
-	public void add(String title) {
+	public static void add(String title) {
 		String input;
 		Tags tags = new Tags();
 
@@ -124,7 +122,7 @@ public class IndexManager {
 		}
 	}
 
-	public void search(String term) {
+	public static void search(String term) {
 		ArrayList<Entry> results = new ArrayList<Entry>();
 		for (Entry current : entries) {
 			if (current.getTitle().toLowerCase().contains(term.toLowerCase())) {
@@ -154,7 +152,7 @@ public class IndexManager {
 		}
 	}
 
-	public void list(String data) {
+	public static void list(String data) {
 		String[] parts = data.split(" ");
 		int start = 0;
 		int end = 0;
@@ -183,7 +181,7 @@ public class IndexManager {
 		}
 	}
 
-	public void delete(String data) {
+	public static void delete(String data) {
 		try {
 			int index = Integer.parseInt(data.split(" ")[0]) - 1;
 			entries.remove(index);
@@ -195,7 +193,7 @@ public class IndexManager {
 		}
 	}
 	
-	public void display(String data) {
+	public static void display(String data) {
 		try {
 			int index = Integer.parseInt(data.split(" ")[0]) - 1;
 			showEntry(index);
@@ -206,13 +204,13 @@ public class IndexManager {
 		}
 	}
 
-	private void showMem() {
+	private static void showMem() {
 		Runtime rt = Runtime.getRuntime();
 		long memory = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024);
 		Io.out("Using " + memory + "MB of memory");
 	}
 	
-	private void showEntry(int index) {
+	private static void showEntry(int index) {
 		Entry result = entries.get(index);
 
 		Io.out("\nTitle:  " + result.getTitle());

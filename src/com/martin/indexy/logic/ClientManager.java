@@ -1,19 +1,23 @@
 package com.martin.indexy.logic;
 
-import java.util.Scanner;
+import java.net.Socket;
 
 import com.martin.indexy.helpers.IndexManager;
 import com.martin.indexy.helpers.Io;
 import com.martin.indexy.helpers.Parser;
 import com.martin.indexy.types.Action;
 
-public class Main {
+public class ClientManager implements Runnable {
+	
+	private Socket clSocket;
 
-	private static IndexManager manager;
+	public ClientManager(Socket clSocket) {
+		super();
+		this.clSocket = clSocket;
+	}
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		manager = new IndexManager(sc);
+	@Override
+	public void run() {
 		String input;
 		displayCommands();
 		System.out.print("\n");
@@ -28,35 +32,33 @@ public class Main {
 				Io.out("A strange exception has just occurred: " + e.getMessage() + "\nBut don't worry, business as usual\n");
 			}
 		}
-
-		sc.close();
 	}
-
-	private static void doAction(Action action) {
+	
+	private void doAction(Action action) {
 		switch (action.getCommand()) {
 		case GENERATE:
-			manager.generate(Integer.parseInt(action.getData()));
+			IndexManager.generate(Integer.parseInt(action.getData()));
 			break;
 		case WRITE:
-			manager.write(action.getData());
+			IndexManager.write(action.getData());
 			break;
 		case READ:
-			manager.read(action.getData());
+			IndexManager.read(action.getData());
 			break;
 		case ADD:
-			manager.add(action.getData());
+			IndexManager.add(action.getData());
 			break;
 		case SEARCH:
-			manager.search(action.getData());
+			IndexManager.search(action.getData());
 			break;
 		case LIST:
-			manager.list(action.getData());
+			IndexManager.list(action.getData());
 			break;
 		case DELETE:
-			manager.delete(action.getData());
+			IndexManager.delete(action.getData());
 			break;
 		case DISPLAY:
-			manager.display(action.getData());
+			IndexManager.display(action.getData());
 			break;
 		case HELP:
 			displayCommands();
@@ -67,7 +69,7 @@ public class Main {
 		}
 	}
 
-	private static void displayCommands() {
+	private void displayCommands() {
 		Io.out("\nAvailable commands:\n");
 		Io.out(" - End (Exit the application)");
 		System.out
