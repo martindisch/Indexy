@@ -59,7 +59,7 @@ public class IndexManager {
 			io.out("Writing to disk...");
 			oos.writeObject(IndexHolder.entries);
 			oos.close();
-			io.out("Data has been written successfully in "
+			io.out("Data has been written successfully to file '" + filename + "' in "
 					+ (System.currentTimeMillis() - millis) + "ms");
 		} catch (FileNotFoundException e) {
 			io.out("File not found");

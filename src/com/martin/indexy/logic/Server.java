@@ -19,7 +19,7 @@ public class Server {
 			for (;;) {
 				Socket clSocket = seSocket.accept();
 
-				System.out.println(Dater.dateString() + "User connected");
+				System.out.println(Dater.getDateAndTimeString() + "User connected");
 
 				ClientManager clM = new ClientManager(clSocket);
 

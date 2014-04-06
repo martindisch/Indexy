@@ -59,7 +59,8 @@ public class ClientManager implements Runnable {
 			// Yeah, crap... Let's hope it was really a quit
 		}
 		finally {
-			System.out.println(Dater.dateString() + "User has quit");
+			System.out.println(Dater.getDateAndTimeString() + "User has quit");
+			indexManager.write(Dater.getDateAndTimeFilename());
 			indexManager.write("db");
 			io.close();
 			try {

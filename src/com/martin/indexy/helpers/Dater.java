@@ -6,15 +6,15 @@ import java.util.Date;
 
 public class Dater {
 
-	private static DateFormat dateFormat = new SimpleDateFormat(
+	private static DateFormat dateAndTime = new SimpleDateFormat(
 			"dd/MM/yyyy HH:mm:ss");
+	private static DateFormat dateAndTimeFilename = new SimpleDateFormat("dd-MM-yyyy HH.mm.ss");
 
-	public static String dateString() {
-		return getDate() + ": ";
+	public static String getDateAndTimeString() {
+		return dateAndTime.format(new Date()) + ": ";
 	}
 
-	private static String getDate() {
-		return dateFormat.format(new Date());
+	public static String getDateAndTimeFilename() {
+		return dateAndTimeFilename.format(new Date());
 	}
-
 }
