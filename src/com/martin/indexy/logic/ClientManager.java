@@ -2,6 +2,7 @@ package com.martin.indexy.logic;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -54,13 +55,11 @@ public class ClientManager implements Runnable {
 							+ "\nBut don't worry, business as usual\n");
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// Yeah, crap... Let's hope it was really a quit
-		}
-		finally {
+		} finally {
 			System.out.println(Dater.getDateAndTimeString() + "User has quit");
-			indexManager.write(Dater.getDateAndTimeFilename());
+			//indexManager.backup();
 			indexManager.write("db");
 			io.close();
 			try {
@@ -97,12 +96,22 @@ public class ClientManager implements Runnable {
 		case DISPLAY:
 			indexManager.display(action.getData());
 			break;
+		case LISTFILES:
+			listFiles();
+			break;
 		case HELP:
 			displayCommands();
 			break;
 		case UNKNOWN:
 			io.out("Unknown command");
 			break;
+		}
+	}
+
+	private void listFiles() {
+		File[] files = new File("/backup").listFiles();
+		for (File act : files) {
+			io.out(act.getName());
 		}
 	}
 
@@ -117,6 +126,7 @@ public class ClientManager implements Runnable {
 		io.out(" - List [start] [end (optional)] (List entries [start] to [end]");
 		io.out(" - Delete [number] (Delete this entry)");
 		io.out(" - Display [number] (Display this entry)");
+		io.out(" - Listfiles (List all files in backup directory)");
 		io.out(" - Help (Display this help)");
 	}
 
