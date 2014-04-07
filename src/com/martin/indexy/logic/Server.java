@@ -18,7 +18,7 @@ public class Server {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		final int backlog = 10;
-		final int port = 23;
+		final int port = 1234;
 
 		try {
 			@SuppressWarnings("resource")
