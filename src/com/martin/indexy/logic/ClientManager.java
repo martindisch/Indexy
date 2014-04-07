@@ -59,7 +59,7 @@ public class ClientManager implements Runnable {
 			// Yeah, crap... Let's hope it was really a quit
 		} finally {
 			System.out.println(Dater.getDateAndTimeString() + "User has quit");
-			//indexManager.backup();
+			indexManager.backup();
 			indexManager.write("db");
 			io.close();
 			try {
@@ -96,7 +96,7 @@ public class ClientManager implements Runnable {
 		case DISPLAY:
 			indexManager.display(action.getData());
 			break;
-		case LISTFILES:
+		case BACKUPS:
 			listFiles();
 			break;
 		case HELP:
@@ -109,7 +109,7 @@ public class ClientManager implements Runnable {
 	}
 
 	private void listFiles() {
-		File[] files = new File("/backup").listFiles();
+		File[] files = new File("backup").listFiles();
 		for (File act : files) {
 			io.out(act.getName());
 		}
@@ -120,13 +120,13 @@ public class ClientManager implements Runnable {
 		io.out(" - End (Exit the application)");
 		io.out(" - Generate [amount] (Add a number of random Entries with random titles and tags to the currently loaded collection)");
 		io.out(" - Write [name] (Save the currently loaded collection to disk)");
-		io.out(" - Read [name] (Load a collection from a file)");
+		io.out(" - Read [name] (Load a collection from a file or backup)");
 		io.out(" - Add [title] (Add a new entry to the currently loaded collection)");
 		io.out(" - Search [part of title or tag] (Search the currently loaded collection)");
 		io.out(" - List [start] [end (optional)] (List entries [start] to [end]");
 		io.out(" - Delete [number] (Delete this entry)");
 		io.out(" - Display [number] (Display this entry)");
-		io.out(" - Listfiles (List all files in backup directory)");
+		io.out(" - Backups (List all files in backup directory)");
 		io.out(" - Help (Display this help)");
 	}
 

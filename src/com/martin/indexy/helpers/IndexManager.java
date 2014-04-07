@@ -1,5 +1,6 @@
 package com.martin.indexy.helpers;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -67,11 +68,23 @@ public class IndexManager {
 			io.out("Some IOException just happened");
 		}
 	}
+	
+	public void backup() {
+		File dir = new File("backup");
+		if (!dir.exists()) {
+			dir.mkdir();
+		}
+		write("backup" + File.separator + Dater.getDateAndTimeFilename());
+	}
 
 	@SuppressWarnings("unchecked")
 	public void read(String filename) {
 		try {
-			FileInputStream fis = new FileInputStream(filename);
+			File f = new File(filename);
+			if (!f.exists()) {
+				f = new File("backup" + File.separator + filename);
+			}
+			FileInputStream fis = new FileInputStream(f);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
 			long millis = System.currentTimeMillis();
@@ -85,7 +98,7 @@ public class IndexManager {
 		} catch (IOException e) {
 			io.out("Some IOException just happened");
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			io.out("The file is not compatible with this version");
 		}
 	}
 
