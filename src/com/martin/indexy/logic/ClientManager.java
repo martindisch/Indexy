@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import com.martin.indexy.helpers.Dater;
+import com.martin.indexy.helpers.IndexHolder;
 import com.martin.indexy.helpers.IndexManager;
 import com.martin.indexy.helpers.Io;
 import com.martin.indexy.helpers.Parser;
@@ -60,7 +61,12 @@ public class ClientManager implements Runnable {
 			// Yeah, crap... Let's hope it was really a quit
 		} finally {
 			System.out.println("\n" + Dater.getDateAndTimeString() + "User has quit" + "\n");
-			indexManager.backup();
+			
+			if (!IndexHolder.entries.equals(IndexHolder.copy)) {
+				indexManager.backup();
+				indexManager.write("db");
+			}
+			
 			indexManager.write("db");
 			io.close();
 			try {

@@ -34,6 +34,7 @@ public class Server {
 					long millis = System.currentTimeMillis();
 					System.out.println("Reading from disk...");
 					IndexHolder.entries = (ArrayList<Entry>) ois.readObject();
+					IndexHolder.copy = IndexHolder.entries;
 					ois.close();
 					System.out.println("Data has been read successfully in "
 							+ (System.currentTimeMillis() - millis) + "ms");
