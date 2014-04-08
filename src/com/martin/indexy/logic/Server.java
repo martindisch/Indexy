@@ -50,7 +50,7 @@ public class Server {
 			for (;;) {
 				Socket clSocket = seSocket.accept();
 
-				System.out.println(Dater.getDateAndTimeString() + "User with IP " + clSocket.getInetAddress() + " connected");
+				System.out.println("\n" + Dater.getDateAndTimeString() + "User with IP " + clSocket.getInetAddress() + " connected");
 
 				ClientManager clM = new ClientManager(clSocket);
 
