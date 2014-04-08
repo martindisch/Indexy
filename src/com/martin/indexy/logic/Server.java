@@ -34,7 +34,6 @@ public class Server {
 					long millis = System.currentTimeMillis();
 					System.out.println("Reading from disk...");
 					IndexHolder.entries = (ArrayList<Entry>) ois.readObject();
-					IndexHolder.copy = IndexHolder.entries;
 					ois.close();
 					System.out.println("Data has been read successfully in "
 							+ (System.currentTimeMillis() - millis) + "ms");
@@ -52,6 +51,8 @@ public class Server {
 				Socket clSocket = seSocket.accept();
 
 				System.out.println("\n" + Dater.getDateAndTimeString() + "User with IP " + clSocket.getInetAddress() + " connected");
+				
+				IndexHolder.checksum = IndexHolder.entries.hashCode();
 
 				ClientManager clM = new ClientManager(clSocket);
 

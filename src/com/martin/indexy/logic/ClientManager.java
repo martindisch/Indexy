@@ -62,12 +62,14 @@ public class ClientManager implements Runnable {
 		} finally {
 			System.out.println("\n" + Dater.getDateAndTimeString() + "User has quit" + "\n");
 			
-			if (!IndexHolder.entries.equals(IndexHolder.copy)) {
+			if (!(IndexHolder.entries.hashCode() == IndexHolder.checksum)) {
 				indexManager.backup();
 				indexManager.write("db");
 			}
-			
-			indexManager.write("db");
+			else {
+				io.out("No changes to database made");
+			}
+
 			io.close();
 			try {
 				clSocket.close();
