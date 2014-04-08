@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import com.martin.indexy.helpers.Dater;
 import com.martin.indexy.helpers.IndexManager;
@@ -110,8 +111,18 @@ public class ClientManager implements Runnable {
 
 	private void listFiles() {
 		File[] files = new File("backup").listFiles();
-		for (File act : files) {
-			io.out(act.getName());
+		
+		ArrayList<String> allFiles = new ArrayList<String>() ;
+	    for (int index = 0; index < files.length; index++)  
+	    {  
+	        File afile = new File(files[index].toString());
+	        allFiles.add(afile.getName());
+	    } 
+	    
+	    java.util.Collections.sort(allFiles);
+	    
+		for (String act : allFiles) {
+			io.out(act);
 		}
 	}
 
